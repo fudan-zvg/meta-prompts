@@ -1,0 +1,81 @@
+_base_ = [
+    '_base_/models/upernet_r50.py', '_base_/datasets/cityscapes.py',
+    '_base_/default_runtime.py', '_base_/schedules/schedule_160k.py'
+]
+IMG_MEAN = [v * 255 for v in [0.5, 0.5, 0.5]]
+IMG_VAR = [v * 255 for v in [0.5, 0.5, 0.5]]
+img_norm_cfg = dict(mean=IMG_MEAN, std=IMG_VAR, to_rgb=True)
+head_c=512 #ori256
+in_c=150
+model = dict(
+    type='VPDSeg',
+    sd_path='checkpoints/v1-5-pruned-emaonly.ckpt',
+    refine_step=1,
+    query_num=in_c,
+    decode_head=dict(
+        type='UPerHead',
+        in_channels=[in_c, in_c, in_c, in_c],
+        in_index=[0, 1, 2, 3],
+        pool_scales=(1, 2, 3, 6),
+        channels=head_c,
+        dropout_ratio=0.1,
+        num_classes=19,
+        loss_decode=
+        [
+        dict(type='CrossEntropyLoss', loss_name='loss_ce', use_sigmoid=False, loss_weight=1.0),
+        dict(type='LovaszLoss', reduction='none', loss_weight=1.0)
+        ]
+        ),
+    auxiliary_head=dict(
+        type='FCNHead',
+        in_channels=in_c,
+        in_index=2,
+        channels=head_c,
+        num_convs=1,
+        dropout_ratio=0.1,
+        num_classes=19,
+        loss_decode=dict(type='CrossEntropyLoss', loss_name='loss_ce_aux', use_sigmoid=False, loss_weight=0.4)
+        ),
+    #test_cfg=dict(mode='slide', crop_size=(896, 896), stride=(597, 597))
+    #test_cfg=dict(mode='slide', crop_size=(769, 769), stride=(512, 512))
+    test_cfg=dict(mode='slide', crop_size=(1024, 1024), stride=(512,512))
+   # test_cfg=dict(mode='whole')
+
+)
+test_pipeline = [
+    dict(type='LoadImageFromFile'),
+    dict(
+        type='MultiScaleFlipAug',
+        img_scale=(2048, 1024),
+        # img_ratios=[0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0],
+        # flip=True,
+        flip=False,
+        transforms=[
+            dict(type='Resize', keep_ratio=True),
+            dict(type='RandomFlip'),
+            dict(type='Normalize', **img_norm_cfg),
+            dict(type='ImageToTensor', keys=['img']),
+            dict(type='Collect', keys=['img']),
+        ])
+]
+data = dict(samples_per_gpu=2, workers_per_gpu=2,
+    train=dict(
+        img_dir=['leftImg8bit/train', 'leftImg8bit/train_extra'],
+        ann_dir=['gtFine/train', 'gtCoarse/train_extra']),
+    test=dict(pipeline=test_pipeline))
+
+lr_config = dict(policy='poly', power=1, min_lr=0.0, by_epoch=False,
+                warmup='linear',
+                 warmup_iters=1500,
+                 warmup_ratio=1e-6)
+
+
+optimizer = dict(type='AdamW', lr=0.00016, weight_decay=0.001,
+        paramwise_cfg=dict(bypass_duplicate=True,
+                            custom_keys={'unet': dict(lr_mult=0.1),
+                                        'encoder_vq': dict(lr_mult=0.0),
+                                        'text_encoder': dict(lr_mult=0.1),
+                                        'norm': dict(decay_mult=0.)}))
+
+checkpoint_config = dict(by_epoch=False, interval=1000)
+evaluation = dict(interval=1000, metric='mIoU', save_best = 'mIoU', pre_eval=True)

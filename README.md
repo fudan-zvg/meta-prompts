@@ -1,15 +1,28 @@
 # Harnessing Diffusion Models for Visual Perception with Meta Prompts
+
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/harnessing-diffusion-models-for-visual/monocular-depth-estimation-on-nyu-depth-v2)](https://paperswithcode.com/sota/monocular-depth-estimation-on-nyu-depth-v2?p=harnessing-diffusion-models-for-visual)
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/harnessing-diffusion-models-for-visual/monocular-depth-estimation-on-kitti-eigen)](https://paperswithcode.com/sota/monocular-depth-estimation-on-kitti-eigen?p=harnessing-diffusion-models-for-visual)
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/harnessing-diffusion-models-for-visual/semantic-segmentation-on-cityscapes-val)](https://paperswithcode.com/sota/semantic-segmentation-on-cityscapes-val?p=harnessing-diffusion-models-for-visual)
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/harnessing-diffusion-models-for-visual/semantic-segmentation-on-cityscapes)](https://paperswithcode.com/sota/semantic-segmentation-on-cityscapes?p=harnessing-diffusion-models-for-visual)                     
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/harnessing-diffusion-models-for-visual/semantic-segmentation-on-ade20k)](https://paperswithcode.com/sota/semantic-segmentation-on-ade20k?p=harnessing-diffusion-models-for-visual)
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/harnessing-diffusion-models-for-visual/pose-estimation-on-coco)](https://paperswithcode.com/sota/pose-estimation-on-coco?p=harnessing-diffusion-models-for-visual)
+
 ### [Paper](https://arxiv.org/abs/2312.14733)
 > [**Harnessing Diffusion Models for Visual Perception with Meta Prompts**](https://arxiv.org/abs/2312.14733),            
 > Qiang Wan, Zilong Huang, Bingyi Kang, Jiashi Feng, Li Zhang        
 
+## 📸 Release
+
+* ⏳ Pose estimation training code and model.
+* ⏳ Semantic segmentation training code and model.
+* **`Jan. 6th, 2024`**: Release depth estimation training code and model.
 
 ## Installation
 Clone this repo, and run
 ```
 sh install.sh
 ```
-Download the checkpoint of [stable-diffusion](https://github.com/runwayml/stable-diffusion) (we use `v1-5` by default) and put it in the `checkpoints` folder. Please also follow the instructions in [stable-diffusion](https://github.com/runwayml/stable-diffusion) to install the required packages.
+Download the checkpoint of [stable-diffusion](https://github.com/runwayml/stable-diffusion) (we use `v1-5` by default) and put it in the `checkpoints` folder.
 
 
 ## Depth Estimation with meta prompts

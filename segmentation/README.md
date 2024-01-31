@@ -1,4 +1,4 @@
-# Semantic Segmentation with VPD
+# Semantic Segmentation with MetaPrompts
 ## Getting Started 
 Follow the guide in [mmseg](https://github.com/open-mmlab/mmsegmentation/blob/master/docs/en/dataset_prepare.md) to prepare  ADE20k and CityScapes datasets.
 

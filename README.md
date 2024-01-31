@@ -14,7 +14,11 @@
 ## 📸 Release
 
 * ⏳ Pose estimation training code and model.
+<<<<<<< HEAD
 * **`Jan. 31th, 2024`**: Release semantic segmentation training code and model.
+=======
+* ⏳ Semantic segmentation training code and model.
+>>>>>>> 81a489fd39a16cbed0c7416689ca7b658da86665
 * **`Jan. 6th, 2024`**: Release depth estimation training code and model.
 
 ## Installation

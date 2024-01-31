@@ -2,3 +2,6 @@ kitti
 nyu_depth_v2
 __pycache__
 v1-5-pruned-emaonly.ckpt
+cityscapes
+ade
+mapillary

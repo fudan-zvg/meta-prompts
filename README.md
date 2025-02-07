@@ -63,7 +63,7 @@ If you find our work useful in your research, please consider citing:
 ```
 @article{wan2023harnessing,
   title={Harnessing Diffusion Models for Visual Perception with Meta Prompts},
-  author={Wan, Qiang and Huang, Zilong and Kang, Bingyi and Feng, Jiashi and Zhang, Li},
+  author={Wan, Qiang and Nie, Ming and Huang, Zilong and Kang, Bingyi and Feng, Jiashi and Zhang, Li},
   journal={arXiv preprint arXiv:2312.14733},
   year={2023}
 }

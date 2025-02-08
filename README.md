@@ -60,7 +60,7 @@ This code is based on [stable-diffusion](https://github.com/CompVis/stable-diffu
 
 ## BibTeX
 If you find our work useful in your research, please consider citing:
-```
+```bibtex
 @article{wan2023harnessing,
   title={Harnessing Diffusion Models for Visual Perception with Meta Prompts},
   author={Wan, Qiang and Nie, Ming and Huang, Zilong and Kang, Bingyi and Feng, Jiashi and Zhang, Li},
